@@ -1,5 +1,8 @@
 {
     "expo": {
+        "android": {
+            "versionCode": 1
+        },
         "assetBundlePatterns": [
             "**/*"
         ],

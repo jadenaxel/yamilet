@@ -32,41 +32,36 @@ const menu: TMenu[] = [
 	},
 ];
 
-const Header: FC = (): JSX.Element => {
+const Header: FC<any> = ({ bottom = 0 }: { bottom: number }): JSX.Element => {
 	const [isFocused, setIsFocused] = useState<any>({});
 	const [isFocusedSearch, setIsFocusedSearch] = useState<boolean>(false);
 
 	const navigation: any = useNavigation();
 
 	return (
-		<View style={styles.container}>
-			<View style={[styles.align, styles.menu]}>
-				<View style={[styles.align, styles.item]}>
-					<Pressable onFocus={() => setIsFocusedSearch(true)} onBlur={() => setIsFocusedSearch(false)}>
-						<Feather name="search" size={27} color={isFocusedSearch ? "gray" : "white"} style={styles.search} />
-					</Pressable>
-					{menu.map((item: any, i: number) => {
-						const activeMenu: boolean = navigation.getState().routes[navigation.getState().routes.length - 1].name.toLowerCase() === item.link.toLowerCase();
+		<View style={[styles.align, styles.menu, { marginBottom: bottom }]}>
+			<View style={[styles.align, styles.item]}>
+				<Pressable onFocus={() => setIsFocusedSearch(true)} onBlur={() => setIsFocusedSearch(false)}>
+					<Feather name="search" size={27} color={isFocusedSearch ? "gray" : "white"} style={styles.search} />
+				</Pressable>
+				{menu.map((item: any, i: number) => {
+					const activeMenu: boolean = navigation.getState().routes[navigation.getState().routes.length - 1].name.toLowerCase() === item.link.toLowerCase();
 
-						return (
-							<Pressable key={i} onFocus={() => setIsFocused({ item: item.name })} onBlur={() => setIsFocused({ item: "" })}>
-								<View style={[styles.menuItem, activeMenu ? styles.menuItem__active : {}, isFocused?.item === item.name ? styles.menuItem__active : {}]}>
-									<Text style={styles.menuItemText}>{item.name}</Text>
-								</View>
-							</Pressable>
-						);
-					})}
-				</View>
-				<Logo size={100} />
+					return (
+						<Pressable key={i} onFocus={() => setIsFocused({ item: item.name })} onBlur={() => setIsFocused({ item: "" })}>
+							<View style={[styles.menuItem, activeMenu ? styles.menuItem__active : {}, isFocused?.item === item.name ? styles.menuItem__active : {}]}>
+								<Text style={styles.menuItemText}>{item.name}</Text>
+							</View>
+						</Pressable>
+					);
+				})}
 			</View>
+			<Logo size={100} />
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-	},
 	align: {
 		flexDirection: "row",
 		alignItems: "center",
