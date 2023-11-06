@@ -2,10 +2,15 @@ import type { FC } from "react";
 
 import { useState, useRef, useEffect } from "react";
 import { Animated, View, Text, StyleSheet, Pressable, ImageBackground } from "react-native";
-import { Color, WindowsHeight, WindowsWith } from "../const";
 
-const ChannelCard: FC<any> = (props: any): JSX.Element => {
+import { Color, WindowsHeight, WindowsWith } from "../const";
+import { TChannelCard } from "../type";
+
+const ChannelCard: FC<any> = (props: TChannelCard): JSX.Element => {
 	const [isFocus, setIsFocus] = useState<boolean>(false);
+
+	// Future props
+	const {}: TChannelCard = props;
 
 	const numberAnimation: Animated.Value = useRef(new Animated.Value(-90)).current;
 	const infoAnimation: Animated.Value = useRef(new Animated.Value(-295)).current;
@@ -23,7 +28,7 @@ const ChannelCard: FC<any> = (props: any): JSX.Element => {
 		<Animated.View>
 			<Pressable style={styles.main} onFocus={() => setIsFocus(true)} onBlur={() => setIsFocus(false)}>
 				<View style={[styles.channel, { borderColor: isFocus ? Color.white : "transparent" }]}>
-					<ImageBackground source={require("../assets/temp/channel.png")} style={[styles.channelImage]} borderRadius={14}>
+					<ImageBackground source={require("../assets/temp/channel.png")} style={styles.channelImage} borderRadius={14}>
 						<Animated.View style={[styles.number, { transform: [{ translateX: numberAnimation }] }]}>
 							<Text style={styles.numberText}>130</Text>
 						</Animated.View>
@@ -84,8 +89,8 @@ const styles = StyleSheet.create({
 		height: 85,
 		width: 191,
 		backgroundColor: Color.black,
-        justifyContent: "center",
-        paddingLeft: 20
+		justifyContent: "center",
+		paddingLeft: 20,
 	},
 	infoThirdSide: {
 		height: 85,
