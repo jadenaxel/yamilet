@@ -15,4 +15,6 @@ export type TCard = {
 	title: string;
 	image: string;
 	description?: string;
+	news?: boolean;
+    movie?: boolean;
 };

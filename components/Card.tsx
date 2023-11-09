@@ -9,20 +9,24 @@ import { Color, WindowsWith } from "../const";
 const Card: FC<any> = (props: TCard): JSX.Element => {
 	const [isFocused, setIsFocused] = useState<boolean>(false);
 
-	const {}: TCard = props;
+	const { news, movie }: TCard = props;
+
+	const newsStyle = { width: WindowsWith / 3, height: 201 };
 
 	return (
 		<Pressable style={styles.main} onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)}>
 			<View style={[styles.cardContainer, isFocused ? { borderColor: Color.white } : null]}>
-				<ImageBackground source={require("../assets/temp/channel.png")} style={styles.card} borderRadius={14} />
+				<ImageBackground source={require("../assets/temp/channel.png")} style={[styles.card, news ? newsStyle : null]} borderRadius={news ? 0 : 14} />
 			</View>
 			<View style={styles.info}>
 				<Text lineBreakMode={"tail"} numberOfLines={2} style={[styles.text, styles.title]}>
 					Hablemos
 				</Text>
-				<Text lineBreakMode={"tail"} numberOfLines={2} style={[styles.text, styles.description]}>
-					Sociedad
-				</Text>
+				{!news && !movie && (
+					<Text lineBreakMode={"tail"} numberOfLines={2} style={[styles.text, styles.description]}>
+						Sociedad
+					</Text>
+				)}
 			</View>
 		</Pressable>
 	);
