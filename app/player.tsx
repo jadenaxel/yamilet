@@ -1,7 +1,7 @@
 import type { FC } from "react";
 
-import { useState, useEffect } from "react";
-import { View, ScrollView, Text, StyleSheet, Pressable, Image } from "react-native";
+import { useState, useRef, useEffect } from "react";
+import { Animated, View, ScrollView, Text, StyleSheet, Pressable, Image } from "react-native";
 import { ResizeMode, Video } from "expo-av";
 import { useKeepAwake } from "expo-keep-awake";
 
@@ -20,13 +20,21 @@ const hackStyle: any = {
 const menu: string[] = ["Todos", "Recientes", "Favoritos", "Deportes", "Niños", "Peliculas", "Noticias"];
 
 const Player: FC = (): JSX.Element => {
-	const [over, setOver] = useState<boolean>(true);
+	const [over, setOver] = useState<boolean>(false);
+
+	const overlayAnimation = useRef(new Animated.Value(-WindowsHeight)).current;
 
 	useKeepAwake();
 
 	useEffect(() => {
+		Animated.timing(overlayAnimation, {
+			toValue: over ? 0 : -WindowsHeight,
+			duration: 500,
+			useNativeDriver: true,
+		}).start();
+
 		const overChange = setTimeout(() => {
-			setOver(true);
+			setOver(false);
 		}, 10000);
 
 		return () => clearTimeout(overChange);
@@ -36,35 +44,32 @@ const Player: FC = (): JSX.Element => {
 		<View style={styles.main}>
 			<Video source={{ uri: sampleVideo }} style={styles.player} shouldPlay resizeMode={ResizeMode.CONTAIN} />
 			{!over && <Pressable style={hackStyle} onFocus={() => setOver(true)}></Pressable>}
-			{over && (
-				<View style={styles.overlay}>
-					<View style={styles.menu}>
-						{menu.map((item: string, i: number) => {
-							return (
-								<Pressable key={i}>
-									<Text style={styles.menuItem}>{item}</Text>
-								</Pressable>
-							);
-						})}
-					</View>
-					<View style={styles.content}>
-						<View style={styles.contentVideo}>
-							<Image source={require("../assets/temp/channel.png")} style={styles.contentVideoShot} />
-							<View style={styles.contentVideoInfo}>
-								<Text style={styles.contentVideoInfoTitle}>Lorem ipsum dolor sit amet, consectetur.</Text>
-								<Text style={styles.contentVideoInfoDesc}>
-									Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed qu
-								</Text>
-							</View>
-						</View>
-						<ScrollView showsVerticalScrollIndicator={false}>
-							{[0, 1, 2, 3, 4, 5].map((item: number, i: number) => {
-								return <Favorite key={i} />;
-							})}
-						</ScrollView>
-					</View>
+
+			<Animated.View style={[styles.overlay, { transform: [{ translateY: overlayAnimation }] }]}>
+				<View style={styles.menu}>
+					{menu.map((item: string, i: number) => {
+						return (
+							<Pressable key={i}>
+								<Text style={styles.menuItem}>{item}</Text>
+							</Pressable>
+						);
+					})}
 				</View>
-			)}
+				<View style={styles.content}>
+					<View style={styles.contentVideo}>
+						<Image source={require("../assets/temp/channel.png")} style={styles.contentVideoShot} />
+						<View style={styles.contentVideoInfo}>
+							<Text style={styles.contentVideoInfoTitle}>Lorem ipsum dolor sit amet, consectetur.</Text>
+							<Text style={styles.contentVideoInfoDesc}>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed qu</Text>
+						</View>
+					</View>
+					<ScrollView showsVerticalScrollIndicator={false}>
+						{[0, 1, 2, 3, 4, 5].map((item: number, i: number) => {
+							return <Favorite key={i} />;
+						})}
+					</ScrollView>
+				</View>
+			</Animated.View>
 		</View>
 	);
 };
@@ -75,8 +80,9 @@ const styles = StyleSheet.create({
 		height: WindowsHeight,
 	},
 	overlay: {
-		top: 0,
+
 		position: "absolute",
+        top: 0,
 		left: 0,
 		right: 0,
 		bottom: 0,
