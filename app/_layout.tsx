@@ -9,6 +9,7 @@ const Layout: FC = (): JSX.Element => {
 		<Wrapper>
 			<Stack screenOptions={{ headerShown: false }}>
 				<Stack.Screen name="index" />
+				<Stack.Screen name="player" />
 			</Stack>
 		</Wrapper>
 	);

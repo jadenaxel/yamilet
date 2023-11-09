@@ -2,19 +2,21 @@ import type { FC } from "react";
 
 import { useState } from "react";
 import { View, Text, StyleSheet, Pressable, ImageBackground } from "react-native";
+import { useRouter } from "expo-router";
 
 import { TCard } from "../type";
 import { Color, WindowsWith } from "../const";
 
 const Card: FC<any> = (props: TCard): JSX.Element => {
 	const [isFocused, setIsFocused] = useState<boolean>(false);
+	const router = useRouter();
 
 	const { news, movie }: TCard = props;
 
 	const newsStyle = { width: WindowsWith / 3, height: 201 };
 
 	return (
-		<Pressable style={styles.main} onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)}>
+		<Pressable onPress={() => router.push("player")} onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)}>
 			<View style={[styles.cardContainer, isFocused ? { borderColor: Color.white } : null]}>
 				<ImageBackground source={require("../assets/temp/channel.png")} style={[styles.card, news ? newsStyle : null]} borderRadius={news ? 0 : 14} />
 			</View>
@@ -32,7 +34,6 @@ const Card: FC<any> = (props: TCard): JSX.Element => {
 	);
 };
 const styles = StyleSheet.create({
-	main: {},
 	cardContainer: {
 		borderWidth: 3,
 		padding: 5,

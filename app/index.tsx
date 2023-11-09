@@ -3,9 +3,8 @@ import type { FC } from "react";
 import { useState, useEffect } from "react";
 import { StyleSheet, ImageBackground, Image, View, Text, ScrollView } from "react-native";
 
-import { Splash } from "../screens";
 import { Color, WindowsWith } from "../const";
-import { Header, ChannelCard, Title, Card } from "../components";
+import { Header, ChannelCard, Title, Card, Splash } from "../components";
 
 const Page: FC = (): JSX.Element => {
 	const [isAnimated, setIsAnimated] = useState<boolean>(true);
