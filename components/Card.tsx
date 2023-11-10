@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import type { Router } from "expo-router/build/types";
 
 import { useState } from "react";
 import { View, Text, StyleSheet, Pressable, ImageBackground } from "react-native";
@@ -9,7 +10,7 @@ import { Color, WindowsWith } from "../const";
 
 const Card: FC<any> = (props: TCard): JSX.Element => {
 	const [isFocused, setIsFocused] = useState<boolean>(false);
-	const router = useRouter();
+	const router: Router = useRouter();
 
 	const { news, movie }: TCard = props;
 

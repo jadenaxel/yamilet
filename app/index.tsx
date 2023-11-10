@@ -16,7 +16,7 @@ const Page: FC = (): JSX.Element => {
 		return () => clearTimeout(animationDone);
 	}, []);
 
-	// if (isAnimated) return <Splash />;
+	if (isAnimated) return <Splash />;
 
 	return (
 		<ScrollView showsVerticalScrollIndicator={false} style={styles.main}>

@@ -22,7 +22,7 @@ const menu: string[] = ["Todos", "Recientes", "Favoritos", "Deportes", "Niños",
 const Player: FC = (): JSX.Element => {
 	const [over, setOver] = useState<boolean>(false);
 
-	const overlayAnimation = useRef(new Animated.Value(-WindowsHeight)).current;
+	const overlayAnimation: Animated.Value = useRef(new Animated.Value(-WindowsHeight)).current;
 
 	useKeepAwake();
 
@@ -33,7 +33,7 @@ const Player: FC = (): JSX.Element => {
 			useNativeDriver: true,
 		}).start();
 
-		const overChange = setTimeout(() => {
+		const overChange: NodeJS.Timeout = setTimeout(() => {
 			setOver(false);
 		}, 10000);
 
