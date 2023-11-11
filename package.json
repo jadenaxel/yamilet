@@ -22,6 +22,11 @@
     },
     "main": "expo-router/entry",
     "name": "yamilet",
+    "prettier": {
+        "printWidth": 180,
+        "tabWidth": 4,
+        "useTabs": true
+    },
     "private": true,
     "scripts": {
         "android": "expo start --android",
