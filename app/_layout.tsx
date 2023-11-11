@@ -10,6 +10,7 @@ const Layout: FC = (): JSX.Element => {
 			<Stack screenOptions={{ headerShown: false }}>
 				<Stack.Screen name="index" />
 				<Stack.Screen name="player" />
+				<Stack.Screen name="search" />
 			</Stack>
 		</Wrapper>
 	);
