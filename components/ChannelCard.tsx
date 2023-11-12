@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { useState, useRef, useEffect } from "react";
 import { Animated, View, Text, StyleSheet, Pressable, ImageBackground } from "react-native";
 
-import { Color, WindowsHeight, WindowsWith } from "../const";
+import { Color, screenHeight, screenWidth } from "../const";
 import { TChannelCard } from "../type";
 
 const ChannelCard: FC<any> = (props: TChannelCard): JSX.Element => {
@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
 		borderColor: "transparent",
 	},
 	channelImage: {
-		width: WindowsWith / 3 - 60,
-		height: WindowsHeight / 2,
+		width: screenWidth / 3 - 60,
+		height: screenHeight / 2,
 		borderRadius: 14,
 		padding: 20,
 		flexDirection: "column",

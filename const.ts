@@ -6,5 +6,5 @@ export const Color = {
 	red: "#FF0000",
 };
 
-export const WindowsWith: number = Dimensions.get("window").width;
-export const WindowsHeight: number = Dimensions.get("window").height;
+export const screenWidth: number = Dimensions.get("screen").width;
+export const screenHeight: number = Dimensions.get("screen").height;

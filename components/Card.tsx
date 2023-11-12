@@ -6,7 +6,7 @@ import { View, Text, StyleSheet, Pressable, ImageBackground } from "react-native
 import { useRouter } from "expo-router";
 
 import { TCard } from "../type";
-import { Color, WindowsWith } from "../const";
+import { Color, screenWidth } from "../const";
 
 const Card: FC<any> = (props: TCard): JSX.Element => {
 	const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -14,7 +14,7 @@ const Card: FC<any> = (props: TCard): JSX.Element => {
 
 	const { news, movie }: TCard = props;
 
-	const newsStyle = { width: WindowsWith / 3, height: 201 };
+	const newsStyle = { width: screenWidth / 3, height: 201 };
 
 	return (
 		<Pressable onPress={() => router.push("player")} onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)}>
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 	},
 	card: {
-		width: WindowsWith / 4.5,
+		width: screenWidth / 4.5,
 		height: 140,
 		padding: 10,
 		borderWidth: 3,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 	info: {
 		flexDirection: "column",
 		marginLeft: 15,
-		width: WindowsWith / 4.6,
+		width: screenWidth / 4.6,
 	},
 	text: {
 		color: Color.white,

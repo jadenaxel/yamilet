@@ -2,8 +2,9 @@ import type { FC } from "react";
 
 import { useState, useEffect } from "react";
 import { StyleSheet, ImageBackground, Image, View, Text, ScrollView } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
-import { Color, WindowsWith } from "../const";
+import { Color, screenHeight, screenWidth } from "../const";
 import { Header, ChannelCard, Title, Card, Splash } from "../components";
 
 const Page: FC = (): JSX.Element => {
@@ -21,14 +22,18 @@ const Page: FC = (): JSX.Element => {
 	return (
 		<ScrollView showsVerticalScrollIndicator={false} style={styles.main}>
 			{/* Header */}
-			<ImageBackground source={require("../assets/temp/header.png")} style={styles.header} resizeMode={"cover"}>
-				<Header bottom={91} />
-				<ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={styles.channel}>
-					{[0, 1, 2, 3, 4].map((item: number, i: number) => {
-						return <ChannelCard key={i} />;
-					})}
-				</ScrollView>
+			<ImageBackground source={require("../assets/temp/header.png")} resizeMode={"cover"}>
+                <View style={styles.header}>
+                    <Header />
+                    <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={styles.channel}>
+                        {[0, 1, 2, 3, 4].map((item: number, i: number) => {
+                            return <ChannelCard key={i} />;
+                        })}
+                    </ScrollView>
+                </View>
+                <LinearGradient colors={["rgba(0, 0, 0, .5)", "rgb(0, 0, 0)"]} style={styles.mainOverlay} />
 			</ImageBackground>
+
 			{/* Deportes */}
 			<View style={styles.deportes}>
 				<Title title={"deportes"} size={32} />
@@ -50,6 +55,7 @@ const Page: FC = (): JSX.Element => {
 					</View>
 				</View>
 			</View>
+
 			{/* Noticias */}
 			<View style={styles.news}>
 				<View style={styles.newsHeader}>
@@ -69,6 +75,7 @@ const Page: FC = (): JSX.Element => {
 					})}
 				</ScrollView>
 			</View>
+
 			{/* Peliculas */}
 			<View>
 				<Title title={"películas"} size={32} />
@@ -87,15 +94,22 @@ export default Page;
 const styles = StyleSheet.create({
 	main: {
 		flex: 1,
-		backgroundColor: Color.black,
+		backgroundColor:' Color.black',
 	},
-	header: {
-		paddingHorizontal: 30,
-		marginBottom: 102,
+    header: {
+        height: screenHeight,
+        position: 'relative',
+        zIndex: 2
 	},
+    mainOverlay: {
+        height: screenHeight,
+        width: screenWidth,
+        position: 'absolute',
+        zIndex: 1
+    },
 	channel: {
 		flexDirection: "row",
-	},
+    },
 	deportes: {
 		paddingHorizontal: 30,
 		marginBottom: 71,
@@ -129,19 +143,19 @@ const styles = StyleSheet.create({
 	deportesLiveInfoTitle: {
 		fontSize: 41,
 		color: Color.white,
-		width: WindowsWith / 2,
+		width: screenWidth / 2,
 		fontWeight: "900",
 		marginBottom: 21,
 	},
 	deportesLiveInfoDesc: {
 		color: Color.white,
-		width: WindowsWith / 2.5,
+		width: screenWidth / 2.5,
 	},
 	deportesLivePic: {
 		borderWidth: 3,
 		borderColor: Color.white,
 		borderRadius: 14,
-		width: WindowsWith / 2.5,
+		width: screenWidth / 2.5,
 		paddingBottom: 20,
 		paddingLeft: 20,
 	},

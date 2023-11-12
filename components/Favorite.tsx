@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
-import { Color, WindowsWith } from "../const";
+import { Color, screenWidth } from "../const";
 
 const Favorite: FC = (): JSX.Element => {
 	return (
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 		borderRadius: 7,
 		justifyContent: "center",
 		paddingHorizontal: 20,
-		width: WindowsWith / 1.7,
+		width: screenWidth / 1.7,
 	},
 	timelineText: {
 		color: Color.white,

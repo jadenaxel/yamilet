@@ -32,18 +32,20 @@ const menu: TMenu[] = [
 	},
 ];
 
-const Header: FC<any> = ({ bottom = 0 }: { bottom: number }): JSX.Element => {
+const Header: FC = (): JSX.Element => {
 	const [isFocused, setIsFocused] = useState<any>({});
 	const [isFocusedSearch, setIsFocusedSearch] = useState<boolean>(false);
 
 	const navigation: any = useNavigation();
 
 	return (
-		<View style={[styles.align, styles.menu, { marginBottom: bottom }]}>
-			<View style={[styles.align, styles.item]}>
+        <View style={styles.menu}>
+            {/* Menu */}
+			<View style={styles.item}>
 				<Pressable onFocus={() => setIsFocusedSearch(true)} onBlur={() => setIsFocusedSearch(false)}>
-					<Feather name="search" size={27} color={isFocusedSearch ? "gray" : "white"} style={styles.search} />
-				</Pressable>
+					<Feather name="search" size={20} color={isFocusedSearch ? "gray" : "white"} style={styles.search} />
+                </Pressable>
+                
 				{menu.map((item: any, i: number) => {
 					const activeMenu: boolean = navigation.getState().routes[navigation.getState().routes.length - 1].name.toLowerCase() === item.link.toLowerCase();
 
@@ -55,31 +57,34 @@ const Header: FC<any> = ({ bottom = 0 }: { bottom: number }): JSX.Element => {
 						</Pressable>
 					);
 				})}
-			</View>
-			<Logo size={100} />
+            </View>
+            
+            {/* Logo */}
+            <Logo width={100} height={25} color="white" />
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
-	align: {
-		flexDirection: "row",
-		alignItems: "center",
-	},
-	menu: {
-		justifyContent: "space-between",
+    menu: {
+        margin: 20,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: 'center'
 	},
 	item: {
-		gap: 5,
+        flexDirection: "row",
+        alignItems: 'center',
+		gap: 2,
 	},
 	search: {
 		marginRight: 20,
 	},
 	menuItem: {
 		borderRadius: 7,
-		paddingVertical: 11,
-		paddingHorizontal: 19,
-		borderWidth: 1,
+        borderWidth: 1,
+		padding: 7,
+        borderColor: 'transparent'
 	},
 	menuItem__active: {
 		borderColor: Color.white,

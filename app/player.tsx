@@ -5,7 +5,7 @@ import { Animated, View, ScrollView, Text, StyleSheet, Pressable, Image } from "
 import { ResizeMode, Video } from "expo-av";
 import { useKeepAwake } from "expo-keep-awake";
 
-import { Color, WindowsHeight, WindowsWith } from "../const";
+import { Color, screenHeight, screenWidth } from "../const";
 import { Favorite } from "../components";
 
 const sampleVideo: string = "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4";
@@ -22,13 +22,13 @@ const menu: string[] = ["Todos", "Recientes", "Favoritos", "Deportes", "Niños",
 const Player: FC = (): JSX.Element => {
 	const [over, setOver] = useState<boolean>(false);
 
-	const overlayAnimation: Animated.Value = useRef(new Animated.Value(-WindowsHeight)).current;
+	const overlayAnimation: Animated.Value = useRef(new Animated.Value(-screenHeight)).current;
 
 	useKeepAwake();
 
 	useEffect(() => {
 		Animated.timing(overlayAnimation, {
-			toValue: over ? 0 : -WindowsHeight,
+			toValue: over ? 0 : -screenHeight,
 			duration: 500,
 			useNativeDriver: true,
 		}).start();
@@ -76,8 +76,8 @@ const Player: FC = (): JSX.Element => {
 const styles = StyleSheet.create({
 	main: {},
 	player: {
-		width: WindowsWith,
-		height: WindowsHeight,
+		width: screenWidth,
+		height: screenHeight,
 	},
 	overlay: {
 
