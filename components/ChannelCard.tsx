@@ -48,7 +48,7 @@ const ChannelCard: FC<any> = (props: TChannelCard): JSX.Element => {
 };
 const styles = StyleSheet.create({
 	main: {
-		overflow: "hidden",
+        overflow: "hidden",
 	},
 	channel: {
 		borderWidth: 3,
@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
 		borderColor: "transparent",
 	},
 	channelImage: {
-		width: screenWidth / 3 - 60,
-		height: screenHeight / 2,
+		width: screenWidth / 3.5,
+		height: screenHeight / 1.7,
 		borderRadius: 14,
 		padding: 20,
 		flexDirection: "column",

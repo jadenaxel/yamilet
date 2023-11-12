@@ -44,7 +44,7 @@ const Splash: FC = (): JSX.Element => {
 					transform: [{ translateX: startAnimation }, { translateY: startAnimationUp }],
 				}}
 			>
-				<Title width={100} height={25} color="white" />
+				<Title width={125} height={40} color="white" />
 			</Animated.View>
 		</Animated.View>
 	);

@@ -25,11 +25,14 @@ const Page: FC = (): JSX.Element => {
 			<ImageBackground source={require("../assets/temp/header.png")} resizeMode={"cover"}>
                 <View style={styles.header}>
                     <Header />
-                    <ScrollView showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={styles.channel}>
-                        {[0, 1, 2, 3, 4].map((item: number, i: number) => {
-                            return <ChannelCard key={i} />;
-                        })}
-                    </ScrollView>
+
+                    <View style={styles.channel}>
+                        <ScrollView showsHorizontalScrollIndicator={false} horizontal>
+                            {[0, 1, 2, 3, 4].map((item: number, i: number) => {
+                                return <ChannelCard key={i} />;
+                            })}
+                        </ScrollView>
+                    </View>
                 </View>
                 <LinearGradient colors={["rgba(0, 0, 0, .5)", "rgb(0, 0, 0)"]} style={styles.mainOverlay} />
 			</ImageBackground>
@@ -108,7 +111,13 @@ const styles = StyleSheet.create({
         zIndex: 1
     },
 	channel: {
-		flexDirection: "row",
+        flexDirection: "row",
+        marginHorizontal: 20,
+        marginVertical: 50,
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0
     },
 	deportes: {
 		paddingHorizontal: 30,
